@@ -1,204 +1,131 @@
 # API Sentinel Enterprise
 
-**An Enterprise API Security and Monitoring Platform**
+API Sentinel Enterprise is a project I built to practise securing and monitoring REST APIs. It has a Spring Boot backend and a React frontend.
 
-API Sentinel Enterprise is a full-stack API security platform designed to protect REST APIs through JWT authentication, role-based access control, request rate limiting, and real-time request monitoring.
+Users can register and log in, while administrators can view API activity and request logs. The backend uses JWT for authentication and applies different rate limits to USER and ADMIN accounts.
 
-The platform provides separate dashboards for administrators and regular users, allowing API activity and security controls to be monitored through a web interface.
+## Live application
 
-## Features
+- **Frontend:** https://api-sentinel-enterprise-incdu2a3w-loke13.vercel.app/login
+- **Backend:** https://api-sentinel-enterprise.onrender.com
+- **Database:** TiDB Cloud
 
-### Authentication and Authorization
-- User registration and login.
-- JWT-based authentication.
-- BCrypt password hashing.
-- Role-based access control (USER and ADMIN).
-- Protected API endpoints.
+## What it does
 
-### Rate Limiting
-- Role-based API request limits.
-- USER: 10 requests per minute.
-- ADMIN: 20 requests per minute.
-- HTTP 429 response when the request limit is exceeded.
-- Rate-limit status monitoring.
+- Register and log in with email and password.
+- Authenticate requests using JWT.
+- Give accounts USER or ADMIN roles.
+- Limit USER requests to 10 per minute and ADMIN requests to 20 per minute.
+- Return HTTP 429 when a rate limit is exceeded.
+- Record request details such as endpoint, method, status code, response time, timestamp and username.
+- Let administrators view request logs and monitoring information through the dashboard.
 
-### API Monitoring
-- Automatic API request logging.
-- Tracks endpoint, HTTP method, response status, response time, timestamp, and username.
-- Admin-only request log access.
-- Request count and user-specific monitoring.
+Public registration creates a USER account. Administrator access is assigned separately.
 
-### Frontend Dashboard
-- React-based user interface.
-- Separate Admin and User dashboards.
-- API traffic visualization.
-- Request logs and user monitoring.
-- Rate-limit status display.
+## Built with
 
-## Technology Stack
-
-| Component | Technologies |
+| Part | Technology |
 |---|---|
-| Backend | Java, Spring Boot |
+| Frontend | React, Vite, Axios |
+| Backend | Java 25, Spring Boot, Maven |
 | Security | Spring Security, JWT, BCrypt |
-| Database | MySQL |
-| ORM | Spring Data JPA, Hibernate |
-| Frontend | React, Vite |
-| Styling | CSS, Tailwind CSS |
-| HTTP Client | Axios |
+| Database | TiDB Cloud (MySQL-compatible) |
+| Data access | Spring Data JPA, Hibernate |
 | Charts | Recharts |
-| API Testing | Insomnia |
-| Version Control | Git, GitHub |
+| Testing | Insomnia |
+| Deployment | Vercel, Render, Docker |
 
-## Project Structure
+## Repository layout
 
 ```text
 API-Sentinel-Enterprise/
-│
 ├── API-Security-Platform/
-│   └── API-Security-Platform/
-│       ├── src/
-│       │   ├── main/
-│       │   │   ├── java/
-│       │   │   └── resources/
-│       │   └── test/
-│       ├── pom.xml
-│       └── mvnw
-│
-├── api-sentinel-frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── api/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── package.json
-│   └── .env.example
-│
+│   └── API-Security-Platform/   # Spring Boot application
+├── api-sentinel-frontend/       # React application
 └── README.md
 ```
 
-## Getting Started
+## Run it locally
 
-### Prerequisites
+### Requirements
 
-Install the following:
+- Java 25
+- Node.js and npm
+- MySQL, or another compatible TiDB database
+- Git
 
-- Java JDK 17 or compatible version specified by the backend project.
-- MySQL.
-- Node.js and npm.
-- Git.
-
-### 1. Clone the Repository
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Lokeshwaran032-commits/API-Sentinel-Enterprise.git
+cd API-Sentinel-Enterprise
 ```
 
-### 2. Backend Setup
+### 2. Start the backend
 
-Navigate to the backend project:
+Create a database named `api_security_platform` and configure your local database connection in the Spring Boot application properties. Set your database username, password and JWT signing secret locally. Do not commit real credentials.
+
+From the backend directory:
 
 ```bash
-cd API-Sentinel-Enterprise/API-Security-Platform/API-Security-Platform
+cd API-Security-Platform/API-Security-Platform
 ```
 
-Create a MySQL database:
-
-```sql
-CREATE DATABASE api_security_platform;
-```
-
-Configure these environment variables before starting the application:
-
-```text
-DB_USERNAME=your_mysql_username
-DB_PASSWORD=your_mysql_password
-JWT_SECRET=your_base64_encoded_secret
-```
-
-The JWT secret must be a valid Base64-encoded signing key of sufficient length.
-
-Run the backend:
-
-**Windows:**
+On Windows:
 
 ```powershell
 .\mvnw.cmd spring-boot:run
 ```
 
-The backend runs at:
+The backend starts on `http://localhost:8080`.
 
-`http://localhost:8080`
+### 3. Start the frontend
 
-### 3. Frontend Setup
-
-Open another terminal:
+Open a second terminal:
 
 ```bash
-cd API-Sentinel-Enterprise/api-sentinel-frontend
-```
-
-Install dependencies:
-
-```bash
+cd api-sentinel-frontend
 npm install
 ```
 
-Create a `.env` file using `.env.example` as a reference:
+Create a `.env.development` file in the frontend directory:
 
 ```env
 VITE_API_BASE_URL=http://localhost:8080
 ```
 
-Start the frontend:
+Then run:
 
 ```bash
 npm run dev
 ```
 
-Open the local URL printed by Vite in your terminal.
+Vite prints the local frontend URL in the terminal.
 
-## API Endpoints
+## Main API endpoints
 
-| Method | Endpoint | Description |
+| Method | Endpoint | Purpose |
 |---|---|---|
-| POST | `/api/auth/register` | Register a new user |
-| POST | `/api/auth/login` | Authenticate and receive JWT |
-| GET | `/api/user/profile` | Access user profile |
-| GET | `/api/admin/dashboard` | Admin-only dashboard access |
-| GET | `/api/monitoring/logs` | Retrieve API request logs |
-| GET | `/api/monitoring/logs/count` | Retrieve request count |
-| GET | `/api/monitoring/logs/user/{username}` | Retrieve user-specific logs |
-| GET | `/api/rate-limit/status` | Check current rate-limit status |
+| POST | `/api/auth/register` | Register a user |
+| POST | `/api/auth/login` | Log in and receive a JWT |
+| GET | `/api/user/profile` | View the authenticated user's profile |
+| GET | `/api/admin/dashboard` | Admin-only dashboard endpoint |
+| GET | `/api/monitoring/logs` | View request logs (ADMIN) |
+| GET | `/api/monitoring/logs/count` | Get the request count (ADMIN) |
+| GET | `/api/monitoring/logs/user/{username}` | View a user's request logs (ADMIN) |
 
-Protected endpoints require a valid JWT. Monitoring endpoints require ADMIN authorization.
+Protected endpoints require a Bearer token. Monitoring endpoints are restricted to ADMIN accounts.
 
-## Security Notes
+## Notes
 
-- Passwords are stored using BCrypt hashing.
-- JWT is used for stateless authentication.
-- Sensitive configuration values are supplied through environment variables.
-- Public registration assigns the USER role.
-- Rate limiting currently uses in-memory storage and resets when the backend restarts. It is intended for this project's current single-instance implementation.
-
-## Future Improvements
-
-- Distributed rate limiting.
-- Advanced threat detection.
-- API analytics and reporting.
-- Cloud deployment.
-- Automated testing and CI/CD integration.
+- Passwords are hashed with BCrypt.
+- The JWT secret and database credentials should be supplied through configuration or environment variables, not stored in the repository.
+- Rate limiting currently uses in-memory storage. Its counters are local to the running backend instance and reset when the application restarts; this is not a distributed rate limiter.
+- The deployed backend uses the cloud profile and connects to TiDB Cloud.
 
 ## Author
 
-**Lokeshwaran P**
+**Lokeshwaran P**  
+B.E. Computer Science and Engineering
 
-Computer Science and Engineering
-
-GitHub: [Lokeshwaran032-commits](https://github.com/Lokeshwaran032-commits)
-
----
-
-*Built as a final-year engineering project to explore backend development, API security, authentication, and monitoring.*
+[GitHub profile](https://github.com/Lokeshwaran032-commits)
