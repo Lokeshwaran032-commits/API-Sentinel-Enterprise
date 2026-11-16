@@ -35,26 +35,25 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // CORS configuration for React frontend
+    // CORS configuration for local and deployed React frontends
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of(
+                "http://localhost:5173",
                 "http://localhost:5174",
                 "http://localhost:5175",
-                "http://localhost:5173",
-                "http://localhost:5176"
+                "http://localhost:5176",
+                "https://api-sentinel-enterprise-incdu2a3w-loke13.vercel.app"
         ));
 
         configuration.setAllowedMethods(
                 List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")
         );
 
-        configuration.setAllowedHeaders(
-                List.of("*")
-        );
+        configuration.setAllowedHeaders(List.of("*"));
 
         configuration.setAllowCredentials(false);
 
@@ -81,7 +80,6 @@ public class SecurityConfig {
 
                 .csrf(csrf -> csrf.disable())
 
-                // JWT authentication is stateless
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
@@ -99,7 +97,6 @@ public class SecurityConfig {
 
                         .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
 
-                        // Allow CORS preflight requests
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         .requestMatchers(
