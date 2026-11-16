@@ -35,7 +35,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    // CORS configuration for local and deployed React frontends
+    // CORS configuration
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
@@ -46,6 +46,7 @@ public class SecurityConfig {
                 "http://localhost:5174",
                 "http://localhost:5175",
                 "http://localhost:5176",
+                "https://api-sentinel-enterprise.vercel.app",
                 "https://api-sentinel-enterprise-incdu2a3w-loke13.vercel.app"
         ));
 
