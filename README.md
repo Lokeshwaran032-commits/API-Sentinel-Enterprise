@@ -11,7 +11,19 @@ Users can register and log in, while administrators can view API activity and re
 - **Database:** TiDB Cloud
 
 ## What it does
+## Screenshots
 
+### Login Page
+![Login Page](screenshots/login.png)
+
+### Admin Dashboard
+![Admin Dashboard](screenshots/dashboard.png)
+
+### API Request Logs
+![API Request Logs](screenshots/request-logs.png)
+
+### Rate Limiting
+![Rate Limiting](screenshots/rate-limiting.png)
 - Register and log in with email and password.
 - Authenticate requests using JWT.
 - Give accounts USER or ADMIN roles.
