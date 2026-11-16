@@ -14,7 +14,7 @@ Users can register and log in, while administrators can view API activity and re
 ## Screenshots
 
 ### Login Page
-![Login Page](screenshots/login.png)
+![Login Page](https://github.com/Lokeshwaran032-commits/API-Sentinel-Enterprise/blob/main/screenshots/Dashboard%20Page.png)
 
 ### Admin Dashboard
 ![Admin Dashboard](screenshots/dashboard.png)
