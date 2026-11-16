@@ -24,7 +24,7 @@ Users can register and log in, while administrators can view API activity and re
 ![API Request Logs](screenshots/request-logs.png)
 
 ### Rate Limiting
-![Rate Limiting](screenshots/rate-limiting.png)
+![Rate Limiting](https://github.com/Lokeshwaran032-commits/API-Sentinel-Enterprise/blob/main/screenshots/Rate%20Limiting%20Page.png)
 - Register and log in with email and password.
 - Authenticate requests using JWT.
 - Give accounts USER or ADMIN roles.
