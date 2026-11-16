@@ -6,8 +6,8 @@ Users can register and log in, while administrators can view API activity and re
 
 ## Live application
 
-- **Frontend:** https://api-sentinel-enterprise-incdu2a3w-loke13.vercel.app/login
-- **Backend:** https://api-sentinel-enterprise.onrender.com
+- **Frontend (login page):** [Open API Sentinel](https://api-sentinel-enterprise-incdu2a3w-loke13.vercel.app/login)
+- **Backend API:** [Open backend URL](https://api-sentinel-enterprise.onrender.com)
 - **Database:** TiDB Cloud
 
 ## What it does
