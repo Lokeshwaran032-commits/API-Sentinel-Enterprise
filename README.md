@@ -21,7 +21,7 @@ Users can register and log in, while administrators can view API activity and re
 ![Admin Dashboard](https://github.com/Lokeshwaran032-commits/API-Sentinel-Enterprise/blob/main/screenshots/Dashboard%20Page.png)
 
 ### API Request Logs
-![API Request Logs](screenshots/request-logs.png)
+![API Request Logs](https://github.com/Lokeshwaran032-commits/API-Sentinel-Enterprise/blob/main/screenshots/Request%20Logs%20Page.png)
 
 ### Rate Limiting
 ![Rate Limiting](https://github.com/Lokeshwaran032-commits/API-Sentinel-Enterprise/blob/main/screenshots/Rate%20Limiting%20Page.png)
